@@ -1,0 +1,56 @@
+<%- include('./partials/header') %>
+	<div class="container">
+    <h1>Interactive Story Game Usage Statistics</h1>
+    <p>Myrtle: <span id=myr><%- myrtle %></span></p>
+    <p>Bruce: <span id=bru><%- bruce %></span></p>
+    <p>Sebastian: <span id=seb><%- sebastian %></span></p>
+    <p>Games Started: <span id=pla><%- games_played %></span></p>
+    <p>Games Completed: <span id=com><%- games_completed %></span></p>
+  </div>
+  
+  <script>
+    window.onload = function () {
+    
+    var chart = new CanvasJS.Chart("chartContainer", {
+      animationEnabled: true,
+      exportEnabled: true,
+      theme: "light1", // "light1", "light2", "dark1", "dark2"
+      title:{
+        text: "Game Stats"
+      },
+        axisY: {
+          includeZero: true
+        },
+      data: [{
+        type: "column", //change type to bar, line, area, pie, etc
+        //indexLabel: "{y}", //Shows y value on all Data Points
+        indexLabelFontColor: "#5A5757",
+            indexLabelFontSize: 16,
+        indexLabelPlacement: "outside",
+        dataPoints: [
+          { y: <%- myrtle %>, label: "Myrtle" },
+          { y: <%- bruce %>, label: "Bruce" },
+          { y: <%- sebastian %>, label: "Sebastian" },
+          { y: <%- games_played %>, label: " Games Started" },
+          { y: <%- games_completed %>, label: "Games Completed" }
+        ]
+      }]
+    });
+    chart.render();
+    
+    }
+    </script>
+    <body>
+    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    </body>
+  
+<%- include('./partials/footer') %>
+
+<script src="https://www.gstatic.com/dialogflow-console/fast/messenger-cx/bootstrap.js?v=1"></script>
+<df-messenger
+  df-cx="true"
+  chat-title="Story beta"
+  agent-id="07a14b3e-db1d-4528-98bd-d93d14f71150"
+  language-code="en"
+></df-messenger>
